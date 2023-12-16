@@ -1,5 +1,6 @@
 # API-тесты на каждый из методов GET/POST/PUT/PATCH/DELETE ручек reqres.in
 # API-тесты на разные схемы (4 схемы - GET/POST/PUT/PATCH)
+# test_delete_single_user_successfully - без тела в response
 
 import random
 
