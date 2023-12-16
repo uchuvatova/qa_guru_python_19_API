@@ -1,6 +1,7 @@
 # API-тесты на каждый из методов GET/POST/PUT/PATCH/DELETE ручек reqres.in
 # API-тесты на разные схемы (4 схемы - GET/POST/PUT/PATCH)
-# test_delete_single_user_successfully - без тела в response
+# API-тесты на статус-коды 200/201/204
+# API-тесты c ответом и test_delete_single_user_successfully без ответа
 
 import random
 
@@ -14,7 +15,7 @@ from utils import *
 
 
 def test_get_single_user_successfully():
-    url = "https://reqres.in/api/users/2"
+    url = ("https://reqres.in/api/users/1")
     schema = load_schema(GET_SINGLE_USER_PATH)
 
     result: Response = requests.get(url)
@@ -37,8 +38,8 @@ def test_post_single_user_successfully():
                         schema)  # чтобы тест прошёл, изменила схему: в схеме ответа на сайте указаны name и job
 
 
-@pytest.mark.parametrize('id_', [1, 2, 3])
-def test_put_single_user_successfully(id_):
+@pytest.mark.parametrize('id_', [1, 2, 13])
+def test_put_single_user_successfully(id_): #баг: можно изменить несуществующего в базе пользователя
     url = f"https://reqres.in/api/users/{id_}"
     schema = load_schema(PUT_CHANGE_USER_PATH)
     jobs = ["lead", "junior", "middle", "senior"]
@@ -56,8 +57,8 @@ def test_put_single_user_successfully(id_):
     assert new_name, new_job in result.text
 
 
-@pytest.mark.parametrize('id_', [1, 2, 3])
-def test_delete_single_user_successfully(id_):
+@pytest.mark.parametrize('id_', [1, 2, 13])
+def test_delete_single_user_successfully(id_): #баг: можно удалить несуществующего в базе пользователя
     url = f"https://reqres.in/api/users/{id_}"
 
     result: Response = requests.delete(url)
@@ -65,8 +66,8 @@ def test_delete_single_user_successfully(id_):
     assert result.status_code == 204
     assert not result.content
 
-@pytest.mark.parametrize('id_', [1, 2, 3])
-def test_put_single_user_successfully(id_):
+@pytest.mark.parametrize('id_', [1, 2, 13])
+def test_patch_single_user_successfully(id_): #баг: можно изменить несуществующего в базе пользователя
     url = f"https://reqres.in/api/users/{id_}"
     schema = load_schema(PATCH_CHANGE_USER_PATH)
     jobs = ["lead", "junior", "middle", "senior"]
@@ -82,4 +83,3 @@ def test_put_single_user_successfully(id_):
     assert result.status_code == 200
     jsonschema.validate(result.json(), schema)
     assert new_name or new_job in result.text
-
