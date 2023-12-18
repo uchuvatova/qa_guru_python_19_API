@@ -1,12 +1,3 @@
-'''
-API-тесты на статус-коды 200/400
-API-тесты на разные схемы
-Позитивные/Негативные тесты на https://reqres.in/api/register
-API-тесты на бизнес-логику:
-        проверка, что регистрация невозможна для несозданных пользователей
-        проверка, что регистрация возможна только при наличии пароля и email
-'''
-
 import random
 import string
 
@@ -14,7 +5,7 @@ import jsonschema
 import requests
 from requests import Response
 
-from utils import *
+from utils.load_schema import *
 
 
 def random_char(char_num):
