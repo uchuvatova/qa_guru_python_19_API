@@ -2,7 +2,7 @@ import json
 import os
 
 PROJECT_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
-SCHEMAS_PATH = os.path.join(PROJECT_ROOT_PATH, 'schemas')
+SCHEMAS_PATH = os.path.join(PROJECT_ROOT_PATH, '../schemas')
 GET_SINGLE_USER_PATH = os.path.join(SCHEMAS_PATH, 'get_single_user.json')
 GET_SINGLE_USER_NOT_FOUND_PATH = os.path.join(SCHEMAS_PATH, 'get_single_user_not_found.json')
 POST_CREATE_USER_PATH = os.path.join(SCHEMAS_PATH, 'post_create_user.json')
